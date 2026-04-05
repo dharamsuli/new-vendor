@@ -1,9 +1,15 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import vendorRoutes from "./routes/vendorRoutes.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const publicDir = path.resolve(__dirname, "../public");
 
 export function createApp() {
   const app = express();
@@ -13,6 +19,7 @@ export function createApp() {
       origin: process.env.CLIENT_URL?.split(",").map((value) => value.trim()) || "*"
     })
   );
+  app.use("/uploads", express.static(path.join(publicDir, "uploads")));
   app.use(express.json());
 
   app.get("/api/health", (_req, res) => {

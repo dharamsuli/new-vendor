@@ -1,63 +1,63 @@
 export const STATIC_PRODUCTS = [
   {
     sku: "NN-APL-001",
-    slug: "kashmir-apples",
-    title: "Kashmir Apples",
+    slug: "seasonal-apple-box",
+    title: "Seasonal Apple Box",
     category: "fruits",
     unit: "1 kg",
     price: 22000,
     compareAtPrice: 26000,
     stock: 45,
-    shortDescription: "Crisp apples with a sweet-tart bite.",
+    shortDescription: "Fresh apples packed for everyday snacking and juicing.",
     description:
-      "Fresh Kashmir apples packed for everyday snacking, breakfast bowls, and juice blends.",
-    image: "/images/products/apples.svg",
+      "A balanced apple selection packed for breakfast bowls, school snacks, and fresh juice at home.",
+    image: "grocery.avif",
     badges: ["seasonal", "best seller"]
   },
   {
     sku: "NN-MNG-002",
-    slug: "alphonso-mangoes",
-    title: "Alphonso Mangoes",
+    slug: "alphonso-mango-selection",
+    title: "Alphonso Mango Selection",
     category: "fruits",
     unit: "1 dozen",
     price: 68000,
     compareAtPrice: 75000,
     stock: 18,
-    shortDescription: "Rich, fragrant mangoes with dense golden pulp.",
+    shortDescription: "Sweet mangoes selected for gifting, shakes, and dessert platters.",
     description:
-      "Premium Alphonso mangoes selected for dessert trays, shakes, gifting, and summer specials.",
-    image: "/images/products/mangoes.svg",
+      "A premium mango selection with rich aroma and soft pulp that works beautifully for summer desserts and family fruit platters.",
+    image: "grocery.avif",
     badges: ["premium"]
   },
   {
     sku: "NN-BNN-003",
-    slug: "farm-bananas",
-    title: "Farm Bananas",
+    slug: "farm-banana-bundle",
+    title: "Farm Banana Bundle",
     category: "fruits",
     unit: "1 dozen",
     price: 7200,
     compareAtPrice: 9000,
     stock: 60,
-    shortDescription: "Soft, sweet bananas for daily use.",
+    shortDescription: "Daily-use bananas for breakfast, smoothies, and quick snacks.",
     description:
-      "Naturally ripened bananas that work well for breakfast, smoothies, baby food, and quick snacks.",
-    image: "/images/products/bananas.svg",
+      "Naturally ripened bananas that stay handy for breakfast tables, tiffins, smoothies, and fast energy bites.",
+    image: "grocery.avif",
     badges: ["everyday value"]
   },
   {
     sku: "NN-ORG-004",
-    slug: "nagpur-oranges",
-    title: "Nagpur Oranges",
+    slug: "citrus-lemon-pack",
+    title: "Citrus Lemon Pack",
     category: "fruits",
-    unit: "1 kg",
-    price: 16000,
-    compareAtPrice: 19000,
-    stock: 28,
-    shortDescription: "Juicy oranges with bright citrus flavor.",
+    unit: "500 g",
+    price: 6500,
+    compareAtPrice: 7800,
+    stock: 48,
+    shortDescription: "Tangy lemons for nimbu pani, seasoning, and marinades.",
     description:
-      "Nagpur oranges known for refreshing sweetness and easy-juice segments.",
-    image: "/images/products/oranges.svg",
-    badges: ["vitamin c"]
+      "A fresh lemon pack for kitchen prep, refreshing drinks, salads, and quick citrus finishing touches.",
+    image: "grocery.avif",
+    badges: ["kitchen staple"]
   },
   {
     sku: "NN-TMT-005",
@@ -68,10 +68,10 @@ export const STATIC_PRODUCTS = [
     price: 6000,
     compareAtPrice: 8000,
     stock: 75,
-    shortDescription: "Firm tomatoes for curry, salad, and sauce.",
+    shortDescription: "Fresh tomatoes for curry, salad, and everyday kitchen prep.",
     description:
-      "Fresh red tomatoes sourced for daily kitchen use with balanced acidity and color.",
-    image: "/images/products/tomatoes.svg",
+      "Bright tomatoes chosen for daily cooking, sauces, fresh salads, and masala bases with balanced sweetness and acidity.",
+    image: "tomato.avif",
     badges: ["kitchen staple"]
   },
   {
@@ -83,105 +83,150 @@ export const STATIC_PRODUCTS = [
     price: 7800,
     compareAtPrice: 9500,
     stock: 52,
-    shortDescription: "Crunchy carrots with natural sweetness.",
+    shortDescription: "Crunchy carrots with natural sweetness for salads, juice, and sabzi.",
     description:
-      "Ideal for sabzi, salads, soups, halwa, and fresh juice blends.",
-    image: "/images/products/carrots.svg",
+      "Farm-fresh carrots that work across salads, soups, halwa, fresh juice, and everyday vegetable prep.",
+    image: "carrot.jpg",
     badges: ["fresh harvest"]
   },
   {
     sku: "NN-PTT-007",
-    slug: "new-potatoes",
-    title: "New Potatoes",
+    slug: "harvest-cauliflower",
+    title: "Harvest Cauliflower",
     category: "vegetables",
-    unit: "2 kg",
+    unit: "1 piece",
     price: 9000,
     compareAtPrice: 11000,
-    stock: 80,
-    shortDescription: "Smooth potatoes for fry, mash, and curry.",
+    stock: 38,
+    shortDescription: "Fresh cauliflower heads for roast trays, sabzi, and curry.",
     description:
-      "Clean, uniform potatoes that cook evenly and fit both home and bulk kitchen use.",
-    image: "/images/products/potatoes.svg",
-    badges: ["bulk friendly"]
+      "A hearty cauliflower pick with dense florets that hold up well for roasting, gravy dishes, and home-style sabzi.",
+    image: "cauliflower.webp",
+    badges: ["farm pick"]
   },
   {
     sku: "NN-SPN-008",
-    slug: "baby-spinach",
-    title: "Baby Spinach",
+    slug: "garden-spinach",
+    title: "Garden Spinach",
     category: "leafy",
     unit: "250 g",
     price: 5200,
     compareAtPrice: 6500,
     stock: 34,
-    shortDescription: "Tender spinach leaves for quick meals.",
+    shortDescription: "Tender spinach leaves for smoothies, dal, wraps, and stir-fries.",
     description:
-      "Washed baby spinach for smoothies, dal, stir-fries, wraps, and salads.",
-    image: "/images/products/spinach.svg",
+      "Fresh spinach leaves harvested for quick weekday meals, smoothies, dals, wraps, and green side dishes.",
+    image: "leaves.jpg",
     badges: ["leafy green"]
   },
   {
     sku: "NN-ONN-009",
-    slug: "red-onions",
-    title: "Red Onions",
-    category: "vegetables",
-    unit: "1 kg",
-    price: 5400,
-    compareAtPrice: 7000,
-    stock: 90,
-    shortDescription: "Sharp, versatile onions for everyday cooking.",
-    description:
-      "Kitchen-ready onions with strong flavor and long shelf life.",
-    image: "/images/products/onions.svg",
-    badges: ["essential"]
-  },
-  {
-    sku: "NN-CCR-010",
-    slug: "english-cucumbers",
-    title: "English Cucumbers",
-    category: "vegetables",
-    unit: "500 g",
-    price: 4600,
-    compareAtPrice: 5900,
-    stock: 40,
-    shortDescription: "Hydrating cucumbers with light crunch.",
-    description:
-      "Best for salads, detox water, raita, and chilled summer platters.",
-    image: "/images/products/cucumbers.svg",
-    badges: ["hydrating"]
-  },
-  {
-    sku: "NN-COR-011",
-    slug: "fresh-coriander",
-    title: "Fresh Coriander",
+    slug: "fresh-coriander-bunch",
+    title: "Fresh Coriander Bunch",
     category: "herbs",
     unit: "100 g",
     price: 1800,
     compareAtPrice: 2500,
     stock: 55,
-    shortDescription: "Fragrant coriander bunches for garnish.",
+    shortDescription: "Fragrant coriander for garnish, chutneys, and finishing touches.",
     description:
-      "Fresh coriander with bright aroma to finish curries, chaats, and chutneys.",
-    image: "/images/products/coriander.svg",
+      "Fresh coriander with a lively aroma for chutneys, garnish, chaat toppings, and daily home cooking.",
+    image: "leaves.jpg",
     badges: ["daily add-on"]
   },
   {
-    sku: "NN-LMN-012",
-    slug: "juicy-lemons",
-    title: "Juicy Lemons",
-    category: "fruits",
-    unit: "500 g",
-    price: 6500,
-    compareAtPrice: 7800,
-    stock: 48,
-    shortDescription: "Tangy lemons for seasoning and drinks.",
+    sku: "NN-CCR-010",
+    slug: "leafy-green-mix",
+    title: "Leafy Green Mix",
+    category: "leafy",
+    unit: "300 g",
+    price: 4600,
+    compareAtPrice: 5900,
+    stock: 40,
+    shortDescription: "A ready leafy mix for salads, saag, wraps, and stir-fries.",
     description:
-      "Fresh lemons for nimbu pani, marinades, salads, and kitchen prep.",
-    image: "/images/products/lemons.svg",
-    badges: ["kitchen staple"]
+      "A simple leafy assortment prepared for home kitchens that want fresh greens ready for multiple meals through the week.",
+    image: "leaves.jpg",
+    badges: ["hydrating"]
+  },
+  {
+    sku: "NN-COR-011",
+    slug: "market-veggie-basket",
+    title: "Market Veggie Basket",
+    category: "vegetables",
+    unit: "2 kg",
+    price: 18000,
+    compareAtPrice: 21000,
+    stock: 22,
+    shortDescription: "A mixed produce basket for households that want a weekly fresh top-up.",
+    description:
+      "A mixed basket of everyday market produce for families stocking up on staples for the week.",
+    image: "grocery.avif",
+    badges: ["family pack"]
+  },
+  {
+    sku: "NN-LMN-012",
+    slug: "romanesco-cauliflower-mix",
+    title: "Romanesco Cauliflower Mix",
+    category: "vegetables",
+    unit: "1 basket",
+    price: 14500,
+    compareAtPrice: 16800,
+    stock: 16,
+    shortDescription: "An eye-catching cauliflower mix for roast platters and premium veggie trays.",
+    description:
+      "A colorful cauliflower assortment ideal for premium kitchen displays, roast platters, and gourmet home cooking.",
+    image: "cauliflower.webp",
+    badges: ["chef pick"]
   }
 ];
 
-export const STATIC_IMAGE_OPTIONS = STATIC_PRODUCTS.map((product) => ({
-  label: product.title,
-  image: product.image
-}));
+export const STATIC_IMAGE_OPTIONS = [
+  {
+    label: "Fresh Produce Photo",
+    image: "grocery.avif"
+  },
+  {
+    label: "Tomato Crate Photo",
+    image: "tomato.avif"
+  },
+  {
+    label: "Carrot Harvest Photo",
+    image: "carrot.jpg"
+  },
+  {
+    label: "Cauliflower Photo",
+    image: "cauliflower.webp"
+  },
+  {
+    label: "Leafy Greens Photo",
+    image: "leaves.jpg"
+  }
+];
+
+export const LEGACY_IMAGE_MIGRATIONS = {
+  "apples.svg": "grocery.avif",
+  "bananas.svg": "grocery.avif",
+  "carrots.svg": "carrot.jpg",
+  "coriander.svg": "leaves.jpg",
+  "cucumbers.svg": "grocery.avif",
+  "lemons.svg": "grocery.avif",
+  "mangoes.svg": "grocery.avif",
+  "onions.svg": "grocery.avif",
+  "oranges.svg": "grocery.avif",
+  "potatoes.svg": "grocery.avif",
+  "spinach.svg": "leaves.jpg",
+  "tomatoes.svg": "tomato.avif",
+  "/images/products/apples.svg": "grocery.avif",
+  "/images/products/bananas.svg": "grocery.avif",
+  "/images/products/carrots.svg": "carrot.jpg",
+  "/images/products/coriander.svg": "leaves.jpg",
+  "/images/products/cucumbers.svg": "grocery.avif",
+  "/images/products/lemons.svg": "grocery.avif",
+  "/images/products/mangoes.svg": "grocery.avif",
+  "/images/products/onions.svg": "grocery.avif",
+  "/images/products/oranges.svg": "grocery.avif",
+  "/images/products/potatoes.svg": "grocery.avif",
+  "/images/products/spinach.svg": "leaves.jpg",
+  "/images/products/tomatoes.svg": "tomato.avif"
+};

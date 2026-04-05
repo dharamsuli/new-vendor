@@ -1,13 +1,29 @@
 import { Product } from "../models/Product.js";
-import { STATIC_PRODUCTS } from "../data/products.js";
+import { LEGACY_IMAGE_MIGRATIONS, STATIC_PRODUCTS } from "../data/products.js";
 
 export async function seedProducts() {
-  const existingCount = await Product.countDocuments();
+  await Product.bulkWrite(
+    STATIC_PRODUCTS.map((product) => ({
+      updateOne: {
+        filter: { sku: product.sku },
+        update: {
+          $set: {
+            ...product,
+            vendorId: null,
+            vendorName: "Nook and Native",
+            isPublished: true
+          }
+        },
+        upsert: true
+      }
+    }))
+  );
 
-  if (existingCount > 0) {
-    return;
-  }
+  await Promise.all(
+    Object.entries(LEGACY_IMAGE_MIGRATIONS).map(([from, to]) =>
+      Product.updateMany({ image: from }, { $set: { image: to } })
+    )
+  );
 
-  await Product.insertMany(STATIC_PRODUCTS);
   console.log("Seeded static Nook and Native products");
 }

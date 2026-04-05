@@ -65,9 +65,20 @@ router.post("/", async (req, res) => {
       });
     }
 
-    const coupon = couponCode ? COUPONS[String(couponCode).toUpperCase()] : null;
-    const discount =
-      coupon && subtotal >= coupon.minSubtotal ? coupon.discount : 0;
+    const normalizedCouponCode = couponCode ? String(couponCode).toUpperCase() : "";
+    const coupon = normalizedCouponCode ? COUPONS[normalizedCouponCode] : null;
+
+    if (normalizedCouponCode && !coupon) {
+      return res.status(400).json({ message: "Invalid coupon code." });
+    }
+
+    if (coupon && subtotal < coupon.minSubtotal) {
+      return res.status(400).json({
+        message: `${normalizedCouponCode} needs a subtotal of Rs.${coupon.minSubtotal / 100} or more.`
+      });
+    }
+
+    const discount = coupon ? coupon.discount : 0;
     const shippingFee = computeShipping(subtotal);
     const total = Math.max(0, subtotal + shippingFee - discount);
 
@@ -82,7 +93,7 @@ router.post("/", async (req, res) => {
       shippingFee,
       discount,
       total,
-      couponCode: discount > 0 ? String(couponCode).toUpperCase() : "",
+      couponCode: discount > 0 ? normalizedCouponCode : "",
       paymentMethod: "COD",
       status: "Pending",
       shippingAddress
