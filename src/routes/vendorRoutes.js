@@ -43,22 +43,47 @@ const upload = multer({
 
 const router = express.Router();
 
+function normalizeProductImages(images, image) {
+  const normalized = [];
+
+  for (const value of [...(Array.isArray(images) ? images : []), image]) {
+    const next = String(value || "").trim();
+    if (!next || normalized.includes(next)) {
+      continue;
+    }
+    normalized.push(next);
+  }
+
+  return normalized;
+}
+
 router.use(requireAuth, requireRole("vendor", "admin"));
 
 router.post("/images", (req, res) => {
-  upload.single("image")(req, res, (error) => {
+  upload.fields([
+    { name: "images", maxCount: 10 },
+    { name: "image", maxCount: 1 }
+  ])(req, res, (error) => {
     if (error) {
       const message = error.message || "Unable to upload image.";
       return res.status(400).json({ message });
     }
 
-    if (!req.file) {
-      return res.status(400).json({ message: "Please choose an image to upload." });
+    const files = [
+      ...((req.files && req.files.images) || []),
+      ...((req.files && req.files.image) || [])
+    ];
+
+    if (!files.length) {
+      return res.status(400).json({ message: "Please choose at least one image to upload." });
     }
 
+    const images = files.map((file) => `/uploads/products/${file.filename}`);
+
     return res.status(201).json({
-      image: `/uploads/products/${req.file.filename}`,
-      fileName: req.file.filename
+      image: images[0],
+      images,
+      fileNames: files.map((file) => file.filename)
     });
   });
 });
@@ -75,9 +100,10 @@ router.get("/products", async (req, res) => {
 
 router.post("/products", async (req, res) => {
   try {
-    const { title, slug, category, unit, price, compareAtPrice, stock, image, shortDescription, description, badges, isPublished } = req.body;
+    const { title, slug, category, unit, price, compareAtPrice, stock, image, images, shortDescription, description, badges, isPublished } = req.body;
+    const normalizedImages = normalizeProductImages(images, image);
 
-    if (!title || !slug || !category || !unit || !price || !image) {
+    if (!title || !slug || !category || !unit || !price || !normalizedImages.length) {
       return res.status(400).json({ message: "Missing required product fields." });
     }
 
@@ -90,7 +116,8 @@ router.post("/products", async (req, res) => {
       price: Number(price),
       compareAtPrice: compareAtPrice ? Number(compareAtPrice) : null,
       stock: Number(stock ?? 0),
-      image,
+      image: normalizedImages[0],
+      images: normalizedImages,
       shortDescription: shortDescription?.trim() || "",
       description: description?.trim() || "",
       badges: Array.isArray(badges) ? badges : [],
@@ -130,7 +157,6 @@ router.patch("/products/:id", async (req, res) => {
       "price",
       "compareAtPrice",
       "stock",
-      "image",
       "shortDescription",
       "description",
       "badges",
@@ -141,6 +167,17 @@ router.patch("/products/:id", async (req, res) => {
       if (field in req.body) {
         product[field] = req.body[field];
       }
+    }
+
+    if ("images" in req.body || "image" in req.body) {
+      const normalizedImages = normalizeProductImages(req.body.images, req.body.image);
+      if (!normalizedImages.length) {
+        return res.status(400).json({ message: "At least one product image is required." });
+      }
+      product.images = normalizedImages;
+      product.image = normalizedImages[0];
+    } else if (!product.images?.length && product.image) {
+      product.images = [product.image];
     }
 
     await product.save();

@@ -1,15 +1,18 @@
 import dotenv from "dotenv";
 import { createApp } from "./app.js";
 import { connectToDatabase } from "./config/db.js";
-import { seedProducts } from "./seed/seedProducts.js";
 
 dotenv.config();
 
 const PORT = Number(process.env.PORT || 5000);
+const missingRazorpayEnvVars = ["RAZORPAY_KEY_ID", "RAZORPAY_KEY_SECRET"].filter((key) => !process.env[key]);
 
 async function start() {
   await connectToDatabase();
-  await seedProducts();
+
+  if (missingRazorpayEnvVars.length > 0) {
+    console.warn(`Razorpay disabled. Missing ${missingRazorpayEnvVars.join(", ")} in server/.env.`);
+  }
 
   const app = createApp();
   app.listen(PORT, () => {
@@ -21,3 +24,4 @@ start().catch((error) => {
   console.error("Server failed to start", error);
   process.exit(1);
 });
+
