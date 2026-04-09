@@ -22,6 +22,14 @@ export function createApp() {
   app.use("/uploads", express.static(path.join(publicDir, "uploads")));
   app.use(express.json());
 
+  app.get("/", (_req, res) => {
+    res.send("Backend running");
+  });
+
+  app.get("/api/test", (_req, res) => {
+    res.json({ ok: true });
+  });
+
   app.get("/api/health", (_req, res) => {
     res.json({ ok: true, name: "Nook and Native API" });
   });
@@ -33,3 +41,5 @@ export function createApp() {
 
   return app;
 }
+
+

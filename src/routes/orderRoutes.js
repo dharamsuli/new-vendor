@@ -147,77 +147,10 @@ router.post("/", async (req, res) => {
       return res.status(403).json({ message: "Only customers can place orders." });
     }
 
-<<<<<<< HEAD
     const orderPayload = await buildOrderPayload({ items, shippingAddress, couponCode });
     const order = await createLocalOrder({
       req,
       orderPayload,
-=======
-    if (!Array.isArray(items) || items.length === 0) {
-      return res.status(400).json({ message: "Your cart is empty." });
-    }
-
-    const productIds = items.map((item) => item.productId);
-    const products = await Product.find({ _id: { $in: productIds }, isPublished: true });
-    const productMap = new Map(products.map((product) => [product._id.toString(), product]));
-
-    const normalizedItems = [];
-    let subtotal = 0;
-
-    for (const item of items) {
-      const product = productMap.get(String(item.productId));
-      const qty = Number(item.qty || 0);
-
-      if (!product || qty <= 0) {
-        return res.status(400).json({ message: "One or more products are invalid." });
-      }
-
-      if (product.stock < qty) {
-        return res.status(400).json({ message: `${product.title} does not have enough stock.` });
-      }
-
-      subtotal += product.price * qty;
-      normalizedItems.push({
-        productId: product._id,
-        vendorId: product.vendorId,
-        title: product.title,
-        image: product.image,
-        qty,
-        price: product.price,
-        unit: product.unit
-      });
-    }
-
-    const normalizedCouponCode = couponCode ? String(couponCode).toUpperCase() : "";
-    const coupon = normalizedCouponCode ? COUPONS[normalizedCouponCode] : null;
-
-    if (normalizedCouponCode && !coupon) {
-      return res.status(400).json({ message: "Invalid coupon code." });
-    }
-
-    if (coupon && subtotal < coupon.minSubtotal) {
-      return res.status(400).json({
-        message: `${normalizedCouponCode} needs a subtotal of Rs.${coupon.minSubtotal / 100} or more.`
-      });
-    }
-
-    const discount = coupon ? coupon.discount : 0;
-    const shippingFee = computeShipping(subtotal);
-    const total = Math.max(0, subtotal + shippingFee - discount);
-
-    const order = await Order.create({
-      orderNumber: `NN${Date.now()}`,
-      customerId: req.user.id,
-      customerName: shippingAddress.fullName,
-      customerEmail: req.user.email,
-      customerPhone: shippingAddress.phone,
-      items: normalizedItems,
-      subtotal,
-      shippingFee,
-      discount,
-      total,
-      couponCode: discount > 0 ? normalizedCouponCode : "",
->>>>>>> 6f6c491c6d3217e52208a243c94d6ad66141993e
       paymentMethod: "COD",
       paymentStatus: "Pending"
     });
@@ -360,8 +293,3 @@ router.get("/my", async (req, res) => {
 });
 
 export default router;
-
-
-
-
-

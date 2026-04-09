@@ -14,11 +14,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.2",
-<<<<<<< HEAD
     "multer": "^2.1.1",
     "razorpay": "^2.9.6"
-=======
-    "multer": "^2.1.1"
->>>>>>> 6f6c491c6d3217e52208a243c94d6ad66141993e
   }
 }

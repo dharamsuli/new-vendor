@@ -60,20 +60,15 @@ function normalizeProductImages(images, image) {
 router.use(requireAuth, requireRole("vendor", "admin"));
 
 router.post("/images", (req, res) => {
-<<<<<<< HEAD
   upload.fields([
     { name: "images", maxCount: 10 },
     { name: "image", maxCount: 1 }
   ])(req, res, (error) => {
-=======
-  upload.single("image")(req, res, (error) => {
->>>>>>> 6f6c491c6d3217e52208a243c94d6ad66141993e
     if (error) {
       const message = error.message || "Unable to upload image.";
       return res.status(400).json({ message });
     }
 
-<<<<<<< HEAD
     const files = [
       ...((req.files && req.files.images) || []),
       ...((req.files && req.files.image) || [])
@@ -89,15 +84,6 @@ router.post("/images", (req, res) => {
       image: images[0],
       images,
       fileNames: files.map((file) => file.filename)
-=======
-    if (!req.file) {
-      return res.status(400).json({ message: "Please choose an image to upload." });
-    }
-
-    return res.status(201).json({
-      image: `/uploads/products/${req.file.filename}`,
-      fileName: req.file.filename
->>>>>>> 6f6c491c6d3217e52208a243c94d6ad66141993e
     });
   });
 });
