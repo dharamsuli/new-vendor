@@ -189,6 +189,24 @@ router.patch("/products/:id", async (req, res) => {
   }
 });
 
+router.delete("/products/:id", async (req, res) => {
+  try {
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ message: "Only admins can delete products." });
+    }
+
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found." });
+    }
+
+    await Product.deleteOne({ _id: product._id });
+    return res.json({ ok: true, productId: product._id.toString() });
+  } catch (error) {
+    return res.status(400).json({ message: "Unable to delete product." });
+  }
+});
+
 router.get("/orders", async (req, res) => {
   try {
     const vendorObjectId = new mongoose.Types.ObjectId(req.user.id);
